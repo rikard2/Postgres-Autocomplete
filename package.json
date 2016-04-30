@@ -1,0 +1,26 @@
+{
+  "name": "postgres-autocomplete",
+  "main": "./lib/postgres-autocomplete",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "postgres-autocomplete:toggle"
+  },
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "2.0.0": "provide"
+      }
+    }
+  },
+  "repository": "https://github.com/atom/postgres-autocomplete",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "pg": "git+https://github.com/lukemurray/node-postgres#master"
+  }
+}

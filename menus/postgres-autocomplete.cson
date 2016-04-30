@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle postgres-autocomplete'
+      'command': 'postgres-autocomplete:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'postgres-autocomplete'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'postgres-autocomplete:toggle'
+        }
+      ]
+    ]
+  }
+]

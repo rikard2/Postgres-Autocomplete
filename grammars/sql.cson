@@ -1,0 +1,103 @@
+'scopeName': 'source.sql'
+'name': 'SQL'
+'fileTypes': [
+  'ddl'
+  'dml'
+  'pgsql'
+  'psql'
+  'sql'
+]
+patterns: [
+  {
+    name: "select",
+    match: "select"
+  }
+]
+repository:
+
+  "qstring-double":
+    name: "string.double.quoted.sql"
+    begin: "\""
+    end: "\"|(?=$)"
+    patterns: [
+      {
+        include: "#string-character-escape"
+      }
+    ]
+  "qstring-single":
+    name: "string.single.quoted.sql"
+    begin: "'"
+    end: "'|(?=$)"
+    patterns: [
+      {
+        include: "#string-character-escape"
+      }
+    ]
+  string:
+    name: "string.quoted.sql"
+    patterns: [
+      {
+        include: "#qstring-single"
+      }
+      {
+        include: "#qstring-double"
+      }
+    ]
+  "comment":
+    name: "comment.sql"
+    patterns: [
+      {
+        include: '#comment-line'
+      },
+      {
+        include: '#comment-block'
+      }
+    ]
+  "comment-line":
+    name: 'comment.line.sql'
+    match: '(--).*$\\n?'
+  "comment-block":
+    name: "comment.block.sql"
+    begin: "/\\*"
+    end: "\\*/"
+  "select":
+    name: 'select.keyword.sql'
+    match: 'select'
+  "from":
+    name: 'from.keyword.sql'
+    match: 'from'
+  "select-columns":
+    name: 'select.columns.sql'
+    match: "select\\s*(?:.*)\\s*(from)*"
+    captures:
+      "1":
+        name: "select.column.sql"
+  "expression":
+    name: "meta.expression.sql"
+    patterns: [
+      {
+        include: '#comment'
+      },
+      {
+        include: '#string'
+      },
+      {
+        include: '#block'
+      },
+      {
+        include: '#select-clause'
+      },
+      {
+        include: "#select-columns"
+      }
+    ]
+
+  "block":
+    name: "meta.block.sql"
+    begin: "BEGIN"
+    end: "END"
+    patterns: [
+      {
+        include: '#expression'
+      }
+    ]
